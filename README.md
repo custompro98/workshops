@@ -6,7 +6,7 @@ This presentation is written in markdown and converted to reveal.js using [vim-r
 
 ### To follow along
 * [Easy] Open the markdown files in this repo
-* [Easy] Open the link the description [Coming Soon]
+* [Easy] Open the link the [description](https://custompro98.github.io/intro-to-sql)
 * [Full]
   - Install [vim-reveal](https://github.com/blindFS/vim-reveal)
   - Install [reveal-js](https://github.com/hakimel/reveal.js)
