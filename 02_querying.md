@@ -40,6 +40,8 @@ FROM   posts
 WHERE  title = 'Title 7'
 ```
 
+Note:
+We have =,<,> operators as well
 <!--sec 4.1-->
 ## How would we only get post titles for a certain author?
 
