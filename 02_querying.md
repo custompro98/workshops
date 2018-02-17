@@ -63,3 +63,25 @@ FROM   posts
 JOIN   authors ON posts.author_id = authors.id
 WHERE  posts.title = 'Title 9'
 ```
+
+<!--sec 5.1-->
+## How is order decided?
+
+<!--sec 5.2-->
+Selections are ordered by order created by default
+
+<!--sec 5.3-->
+## That doesn't seem very useful...
+
+<!--sec 5.4-->
+That's why we have the `ORDER BY` clause!
+
+<!--sec 5.5-->
+## How would we order posts by their title?
+
+<!--sec 5.6-->
+```sql
+SELECT *
+FROM   posts
+ORDER BY title
+```
