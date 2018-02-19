@@ -47,3 +47,10 @@ JOIN   authors ON posts.author_id = authors.id
 GROUP BY authors.name
 HAVING COUNT(posts.id) > 6
 ```
+
+<!--sec 5.1-->
+## And now you know the basics of querying in SQL
+
+<!--sec 5.2-->
+Have fun 😃
+

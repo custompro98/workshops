@@ -87,3 +87,6 @@ SELECT *
 FROM   posts
 ORDER BY title
 ```
+
+<!--sec 6.1-->
+[Next Steps](learn-sql-03.html)

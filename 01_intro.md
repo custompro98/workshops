@@ -27,3 +27,6 @@ There are columns that say what the data means and rows for each entry
 # What tools can I use?
 - the command line using `sqlite3 <db_name>`
 - a GUI like [TablePlus](https://tableplus.io/)
+
+<!--sec 4.1-->
+[Next Steps](learn-sql-02.html)

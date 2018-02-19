@@ -82,7 +82,4 @@ WHERE  title = 'Title 1'
 ```
 
 <!--sec 6.1-->
-## And now you know the basics of querying in SQL
-
-<!--sec 6.2-->
-Have fun 😃
+[Next Steps](learn-sql-04.html)
