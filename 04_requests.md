@@ -92,3 +92,10 @@ Requet specs often take longer to set up than unit tests, which is why there sho
 
 <!--sec 4.3-->
 ![pyramid](images/test_pyramid.png)
+
+Note:
+The testing pyramid shows that we should have mostly unit tests as our foundation, hitting every happy and sad path
+Next we should have our service (or integration) tests, these hit every happy path and maybe a few sad paths
+And at the top we have our UI (or acceptance) tests, these hit the critical happy paths in our application
+
+The speed decreases while the cost of the test in terms of computational power increases
