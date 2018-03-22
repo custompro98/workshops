@@ -1,4 +1,4 @@
-<!--Meta theme:solarized title:Learn RSpec 02-->
+<!--Meta theme:solarized title:Learn RSpec 03-->
 
 <!--sec 1.1-->
 # What is a factory?
@@ -39,4 +39,5 @@ end
 
 <!--sec 3.1-->
 ## Great! Now let's get into some request specs
-Clone the [Test API](https://github.com/custompro98/pocket-rails) and checkout the `learn_rspec` branch
+Clone the [Test API](https://github.com/custompro98/pocket-rails),  checkout the `learn_rspec` branch, and run `rake db:setup`
+[Next Steps](learn-rspec-04.html)
