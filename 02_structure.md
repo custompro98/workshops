@@ -28,21 +28,43 @@ end
 
 describe TestClass do
   it 'works correctly' do
-    expect(subject.add_one_to(1)).to eq 2
+    # Setup
+    class = TestClass.new
+    
+    # Exercise
+    result = class.add_one_to(1)
+  
+    # Verify
+    expect(result).to eq 2
   end
 end
 ```
 
 <!--sec 2.3-->
-## ...where did subject come from?
+```ruby
+class TestClass
+  def add_one_to(num)
+    num + 1
+  end
+end
+
+describe TestClass do
+  it 'works correctly' do
+    expect(subject.add_one_to(1)).to eq 2
+  end
+end
+```
 
 <!--sec 2.4-->
-`subject` is an RSpec helper that creates a new object of the class being described
+## ...where did subject come from?
 
 <!--sec 2.5-->
-## How do we know a test is passing for the reason I expect?
+`subject` is an RSpec helper that creates a new object of the class being described
 
 <!--sec 2.6-->
+## How do we know a test is passing for the reason I expect?
+
+<!--sec 2.7-->
 A common practice is to make a test fail by changing the expectation
 
 Note:
@@ -105,6 +127,17 @@ end
 
 Note:
 A before can be used to do more useful things like log in as a user or navigate to a page
+
+<!--sec 4.4-->
+Be careful though! Notice how in the context of the spec, we don't know what @num is
+```ruby
+it 'works correctly' do
+  expect(subject.add_one_to(@num)).to eq 2
+end
+```
+
+Note:
+This is called a "Mystery Guest". In this case it's harmless, but imagine if this was line 300+ of a large spec file with lots of let and before blocks.
 
 <!--sec 5.1-->
 ## Okay, how about if I need data for my test?

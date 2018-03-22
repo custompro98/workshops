@@ -9,6 +9,9 @@ It's how we set up data in the database for a test
 <!--sec 1.3-->
 IMPORTANT: Each test should be isolated, which means we need to clean the database between each test
 
+<!--sec 1.4-->
+ALSO IMPORTANT: You should only use factories if you need to, for example to pass validations on that class.
+
 <!--sec 2.1-->
 ## So what does one look like?
 
@@ -18,17 +21,17 @@ Well that depends, but we use FactoryBot (formerly FactoryGirl) so it looks like
 # spec/factories/user.rb
 FactoryBot.define do
   factory :user do
-    first_name 'Tester'
-    sequence(:last_name).to_s
-    sequence(:email) { |n| "#{n}@example.com" }
-    password 'password'
+    # Notice how there's nothing here. This is intentional.
+    # The factory should only have the minimum required default values to allow the class to save.
+    # Any additional attributes should be declared by your test or through traits.
+    # This forces factories to be a la carte.
   end
-end 
+end
 
 # spec/test_spec.rb
 describe 'User' do
   before do
-    create(:user)
+    create(:user, first_name: 'Tester')
   end
 
   it 'works correctly' do
