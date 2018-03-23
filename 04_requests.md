@@ -53,11 +53,14 @@ require 'rails_helper'
 
 describe 'Bookmarks', type: :request do
   describe 'GET /bookmarks' do
-    let(:owner) { create(:user) }
-
-    before { get v1_bookmarks_path, headers: headers(owner) }
-
     it 'returns an empty array' do
+      # Setup
+      owner = create(:user)
+
+      # Exercise
+      get v1_bookmarks_path, headers: headers(owner) 
+
+      # Verify
       expect(json[:bookmarks]).to be_empty
     end
   end
@@ -84,13 +87,64 @@ Note:
 We only want to populate fields that are marked as required in the database, that way we only create as much data as we need
 We use sequences to generate random data, every time we create a user the sequence will increase by 1.  So that means evey user will have a unique last name and email address in this case
 
-<!--sec 4.1-->
-## Our test passed! That was a lot of set up...
+<!--sec 5.1-->
+## But shouldn't we test what happens when this endpoint needs data?
 
-<!--sec 4.2-->
+<!--sec 5.2-->
+```ruby
+require 'rails_helper'
+
+describe 'Bookmarks', type: :request do
+  describe 'GET /bookmarks' do
+    context 'there are no bookmarks for the user' do
+      it 'returns an empty array' do
+        owner = create(:user)
+
+        get v1_bookmarks_path, headers: headers(owner) 
+
+        expect(json[:bookmarks]).to be_empty
+      end
+    end
+
+    context 'there is a bookmark for the user' do
+      it 'returns the bookmark' do
+        owner = create(:user)
+        bookmark = create(:bookmark, user_id: owner.id)
+
+        get v1_bookmarks_path, headers: headers(owner) 
+
+        expect(json[:bookmarks].size).to eq 1
+        expect(json[:bookmarks].first.id).to eq bookmark.id
+      end
+    end
+  end
+end
+```
+
+<!--sec 5.3-->
+## Now this factory is missing?
+
+<!--sec 5.4-->
+```ruby
+FactoryBot.define do
+  factory :bookmark do
+    sequence(:title) { |n| "Title #{n}" }
+    sequence(:url) { |n| "www.#{n}.com" }
+
+    before(:create) do |bookmark|
+      bookmark.user_id ||= create(:user).id
+    end
+  end
+end
+```
+
+<!--sec 6.1-->
+## Our tests passed! That was a lot of set up...
+
+<!--sec 6.2-->
 Requet specs often take longer to set up than unit tests, which is why there should be fewer than your request specs
 
-<!--sec 4.3-->
+<!--sec 6.3-->
 ![pyramid](images/test_pyramid.png)
 
 Note:
@@ -99,3 +153,6 @@ Next we should have our service (or integration) tests, these hit every happy pa
 And at the top we have our UI (or acceptance) tests, these hit the critical happy paths in our application
 
 The speed decreases while the cost of the test in terms of computational power increases
+
+<!--sec 7.1-->
+[Next Steps](learn-rspec-05.html)

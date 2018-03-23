@@ -43,4 +43,10 @@ end
 <!--sec 3.1-->
 ## Great! Now let's get into some request specs
 Clone the [Test API](https://github.com/custompro98/pocket-rails),  checkout the `learn_rspec` branch, and run `rake db:setup`
+
+Note:
+This repo already has a few helpers set up to get us writing tests faster, we can revisit these once we get our own tests working
+<!--sec 3.2-->
 [Next Steps](learn-rspec-04.html)
+
+

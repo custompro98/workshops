@@ -103,3 +103,12 @@ describe '#person_presenter' do
   end
 end
 ```
+
+<!--sec 5.1-->
+## Great! Now we've written tests and saw a few things we should watch for
+
+<!--sec 5.2-->
+## What do you want to do next?
+- Write more unit specs?
+- Write more request specs?
+- Try it out in our main app?
