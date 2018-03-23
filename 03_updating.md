@@ -16,6 +16,8 @@ SET    title = 'Here is a new title'
 ruby build_db.rb
 ```
 
+Note:
+This needs to be run from the cloned repo
 <!--sec 2.2-->
 ## Any ideas on how to only update posts where a condition is met?
 

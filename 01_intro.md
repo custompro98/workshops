@@ -13,6 +13,12 @@ Declarative means you say what you want, not how to get it. We'll see examples o
 <!--sec 2.1-->
 # What is a database?
 
+Note:
+There are many types of databases, but we're going to talk about the most common one which is associatd with SQL
+Other types:
+- NoSQL (document-based)
+- Graph
+- Key-value store
 <!--sec 2.2-->
 ## Relational Database
 
