@@ -4,7 +4,7 @@
 # GraphQL and Chill
 
 <!--sec 1.2-->
-Before we get into an analogy we need to know
+Before we get into it we need to know
 
 <!--sec 1.3-->
 ## What is GraphQL?
@@ -23,11 +23,15 @@ NOTE: If you take away one thing from this lunch and learn, it should be this
 <!--sec 1.6-->
 The consumer shouldn't think of your API as an application they need to interface with, but as a pile of data at its disposal
 
+NOTE: For example, Relay (GraphQL & React) wants you to treat your API as your data store
+
 <!--sec 2.1-->
 ## What makes it a Query Language?
-Instead of passing params to a specific endpoint to determine the shape of results, you specify the shape directly to a single endpoint
 
 <!--sec 2.2-->
+Instead of passing params to a specific endpoint to determine the shape of results, you specify the shape directly to a single endpoint
+
+<!--sec 2.3-->
 ```json
 query {
   users {
@@ -38,6 +42,11 @@ query {
   }
 }
 ```
+
+NOTE: This is a general structure of a query
+Query tells the API we're looking up data
+A field is what tells the API what fields to get back
+QUESTION: What are fields in this query?
 
 <!--sec 3.1-->
 ## What makes it a Graph?
@@ -82,70 +91,84 @@ The REST version looks smaller, but the GraphQL version better illustrates relat
 <!--sec 3.5-->
 ![graph](images/graph.png)
 
-<!--sec 4.1-->
-## REST is Cable
+NOTE: This is called the viewer pattern, the idea is that the user is the entry point of the graph.
+Connections just follow the edges on the graph
 
-NOTE: It's the big kid on the block
+<!--sec 4.1-->
+## Why REST?
+
+NOTE: REST promised we'd never need to think about how to access our data if we used the right HTTP verb and routes
+Everything would make sense
+but what's the biggest problem with REST endpoints?
 
 <!--sec 4.2-->
-### Bundling channels for a promotional price
+## Our endpoints send back too much data!
 
-NOTE: maybe even internet and a phone line
-You don't want or need these channels, but to get Cartoon Network you need TBS
+NOTE: Enter query params...
 
 <!--sec 4.3-->
-### Flipping to a channel
+### This is fine
+`GET /api/users/posts?include_author=false&include_comments=true`
 
-NOTE: you have to load a channel to see what's on
-If it's not what you want, you load the next channel
-If what you want to watch isn't on, you're out of luck
-Channels are like network requests, you have to load it to see what it is
+NOTE: but might not be good enough
 
 <!--sec 4.4-->
-### TV Guide
-
-NOTE: you might have thought, well Mitch, there's a TV guide so I can go directly to a channel I know I want
-A TV guide is like an index page, you only get the title and a summary of the show, not the actual show
-And if the show isn't on, you're just out of luck
-
-<!--sec 4.5-->
-### TV Guide Previews
-
-NOTE: Gotcha again, I can have a live preview of a channel from the guide
-Well, that means every channel's preview is included in the guide every time
-We're cramming more and more into the guide that you don't always want
-Every time we open the guide, we NEED to load all of this data
-There has to be an easier way
+### This is not fine
+`GET /api/users/comments?since=1234567890&include[]=title&include[]=favorite&include[]=author&include[]=comments&...`
 
 <!--sec 5.1-->
-## GraphQL is Streaming Services
+## Why GraphQL?
 
-NOTE: It's the new kid and that makes the big kid nervous
+NOTE: it's easiest to show with an example
 
 <!--sec 5.2-->
-### Netflix
-
-NOTE: you have access to all of the shows in the library, similar to all the channels in a bundle
+### Want all of a user's posts? Fine.
+```json
+query {
+  users {
+    authoredPosts {
+      title
+      content
+    }
+  }
+}
+```
 
 <!--sec 5.3-->
-### Turning on a show
-
-NOTE: You search for any show you want, start playing - no flipping through channels, no concept of "is it on?"
+### Want the post's comments and author? Also fine.
+```json
+query {
+  users {
+    authoredPosts {
+      title
+      content
+      author {
+        first_name
+        last_name
+        email
+      }
+      comments {
+        content
+        author {
+          frst_name
+          last_name
+          email
+        }
+      }
+    }
+  }
+}
+```
 
 <!--sec 5.4-->
-### Netflix doesn't have the show I want
+## It's the same endpoint 
+`POST /api/graphql`
 
-NOTE: You're thinking that Netflix doesn't have every show ever created
+NOTE: But a consumer can ask for any data they want
+You can offer anything and everything, but it won't affect the consumer unless they want it
 
 <!--sec 5.5-->
-Then let's try Hulu or Amazon Prime or whatever else
-
-<!--sec 5.6-->
-### I can search through any and all streaming networks
-
-NOTE: I could already have access to all of them, use a free trial, or cancel one for another
-GraphQL calls this schema stitching, a GraphQL API can do as little as forward requests to another API or have its own store of data to display
-This is a really powerful concept that helps large APIs convert, simply point everything at your existing REST API so consumers can build out support at the same time your GraphQL API is coming online
+## And the data is where it belongs, in the request body
 
 <!--sec 6.1-->
 ## Coexistence
@@ -154,38 +177,32 @@ NOTE: REST and GraphQL actually work really well together
 for all the talk of "REST-killer" one doesn't have to "kll" the other
 
 <!--sec 6.2-->
-### Parents
-
-NOTE: you probably aren't going to tell your parents to cut cable
-It makes sense to them, it works, they already have it
-
-<!--sec 6.3-->
-### Siblings
-
-NOTE: But you might tell your sibling who's moving to a new apartment to try cutting cable
-
-<!--sec 6.4-->
 ### Choose what works
 
 NOTE: In the same sense, you can have GraphQL manage the read portion of your API and rely on REST to handle create, update, delete
 Or you can have GraphQL handle CRUD while you use REST for auth
 It's entirely up to you how far you want to dive in
 At the end of the day, choose what works for you
+There's no reason you can't have both a GraphQL API and a REST API
 
 <!--sec 7.1-->
-## Why use GraphQL?
+## When to use GraphQL?
 
 <!--sec 7.2-->
-## Why use GraphQL?
+## When to use GraphQL?
 - Your objects can be connected to other objects
 
 <!--sec 7.3-->
-## Why use GraphQL?
+## When to use GraphQL?
 - Your objects can be connected to other objects
 - Your consumers don't always want all of the connected objects
 
 <!--sec 7.4-->
-## Why use GraphQL?
+## When to use GraphQL?
 - Your objects can be connected to other objects
 - Your consumers don't always want all of the connected objects
 - You want to make your consumers happy
+
+<!--sec 7.5-->
+For further reading on nomenclature:
+https://custompro98.github.io/slides/
